@@ -1,0 +1,23 @@
+---
+import config from 'virtual:starlight-kbd/config'
+
+import Select from './Select.astro'
+
+// TODO(HiDeoo) icon
+// TODO(HiDeoo) label
+// TODO(HiDeoo) width/coud it be CSS property?
+
+let value = ''
+const options = config.types.map((type) => {
+  if (type.default) value = type.id
+  return {
+    label: type.label,
+    selected: type.default,
+    value: type.id,
+  }
+})
+---
+
+<starlight-kbd-select>
+  <Select icon="laptop" label={Astro.locals.t('themeSelect.accessibleLabel')} {options} {value} width="6.25em" />
+</starlight-kbd-select>

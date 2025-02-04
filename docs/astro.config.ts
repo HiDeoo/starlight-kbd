@@ -1,6 +1,5 @@
 import starlight from '@astrojs/starlight'
 import { defineConfig } from 'astro/config'
-// TODO(HiDeoo) casing here
 import starlightKbd from 'starlight-kbd'
 
 export default defineConfig({
@@ -10,7 +9,14 @@ export default defineConfig({
       editLink: {
         baseUrl: 'https://github.com/HiDeoo/starlight-kbd/edit/main/docs/',
       },
-      plugins: [starlightKbd()],
+      plugins: [
+        starlightKbd({
+          types: [
+            { id: 'mac', label: 'macOS' },
+            { id: 'windows', label: 'Windows', default: true },
+          ],
+        }),
+      ],
       sidebar: [
         // TODO(HiDeoo)
         // {
@@ -37,7 +43,7 @@ export default defineConfig({
         github: 'https://github.com/HiDeoo/starlight-kbd',
       },
       // TODO(HiDeoo) casing here
-      title: 'Starlight KBD',
+      title: 'Starlight Kbd',
     }),
   ],
   site: 'https://starlight-kbd.netlify.app/',
