@@ -7,6 +7,7 @@
   "type": "module",
   "exports": {
     ".": "./index.ts",
+    "./components": "./user-components/index.ts",
     "./components/KbdSelect.astro": "./components/starlight/KbdSelect.astro",
     "./overrides/ThemeSelect.astro": "./overrides/ThemeSelect.astro",
     "./package.json": "./package.json"

@@ -1,0 +1,21 @@
+---
+import config from 'virtual:starlight-kbd/config'
+
+export type Props = Record<string, string>
+
+const defaultKbd = Astro.props[config.defaultType]
+
+if (!defaultKbd) {
+  // TODO(HiDeoo)
+  throw new Error(`No default kbd type found in config`)
+}
+---
+
+<div>KBD</div>
+
+{
+  config.types.map((type) => {
+    const kbd = Astro.props[type.id]
+    return <div>{kbd ?? defaultKbd}</div>
+  })
+}

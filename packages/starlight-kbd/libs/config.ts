@@ -1,27 +1,34 @@
 import { AstroError } from 'astro/errors'
 import { z } from 'astro/zod'
 
-const configSchema = z.object({
-  // TODO(HiDeoo) comment
-  // TODO(HiDeoo) name? types? platform?
-  types: z
-    .array(
-      z.object({
-        // TODO(HiDeoo) comment
-        id: z.string(),
-        // TODO(HiDeoo) comment
-        label: z.string(),
-        // TODO(HiDeoo) comment
-        default: z.boolean().default(false),
-      }),
-    )
-    .min(1)
-    .refine(
-      (value) => value.filter((type) => type.default).length === 1,
-      // TODO(HiDeoo) Update message when the name is updated
-      { message: 'The `types` array must contain exactly one default type.' },
-    ),
-})
+const configSchema = z
+  .object({
+    // TODO(HiDeoo) comment
+    // TODO(HiDeoo) name? types? platform?
+    types: z
+      .array(
+        z.object({
+          // TODO(HiDeoo) comment
+          id: z.string(),
+          // TODO(HiDeoo) comment
+          // TODO(HiDeoo) label i18n
+          label: z.string(),
+          // TODO(HiDeoo) comment
+          default: z.boolean().default(false),
+        }),
+      )
+      .min(1)
+      .refine(
+        (value) => value.filter((type) => type.default).length === 1,
+        // TODO(HiDeoo) Update message when the name is updated
+        { message: 'The `types` array must contain exactly one default type.' },
+      ),
+  })
+  .transform((value) => ({
+    ...value,
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    defaultType: value.types.find((type) => type.default)!.id,
+  }))
 
 export function validateConfig(userConfig: unknown): StarlightKbdConfig {
   const config = configSchema.safeParse(userConfig)

@@ -6,18 +6,6 @@ import { vitePluginStarlightKbdConfig } from './libs/vite'
 
 export type { StarlightKbdConfig, StarlightKbdUserConfig }
 
-/**
- *
- * [
- *   { id: 'mac', name: 'macOS' },
- *   { id: 'windows', name: 'Windows', default: true },
- *   { id: 'linux', name: 'Linux' },
- * ]
- *
- */
-
-// TODO(HiDeoo) name i18n
-
 export default function starlightKbd(userConfig: StarlightKbdUserConfig): StarlightPlugin {
   const config = validateConfig(userConfig)
 
@@ -29,6 +17,7 @@ export default function starlightKbd(userConfig: StarlightKbdUserConfig): Starli
           components: {
             ...starlightConfig.components,
             ...overrideStarlightComponent(starlightConfig.components, logger, 'ThemeSelect', 'KbdSelect'),
+            // TODO(HiDeoo) mobile KbdSelect
           },
         })
 
