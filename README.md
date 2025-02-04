@@ -1,1 +1,1 @@
-# starlight-kbd
+packages/starlight-kbd/README.md
