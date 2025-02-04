@@ -14,6 +14,7 @@ export default defineConfig({
           types: [
             { id: 'mac', label: 'macOS' },
             { id: 'windows', label: 'Windows', default: true },
+            { id: 'linux', label: 'Linux' },
           ],
         }),
       ],
