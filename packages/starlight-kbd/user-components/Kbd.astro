@@ -1,6 +1,8 @@
 ---
 import config from 'virtual:starlight-kbd/config'
 
+import { parseKbd } from '../libs/kbd'
+
 export type Props = Record<string, string>
 
 const defaultKbd = Astro.props[config.defaultType]
@@ -15,7 +17,25 @@ if (!defaultKbd) {
 
 {
   config.types.map((type) => {
-    const kbd = Astro.props[type.id]
-    return <div>{kbd ?? defaultKbd}</div>
+    const kbd = Astro.props[type.id] ?? defaultKbd
+    return (
+      <div>
+        {parseKbd(kbd).map((chord) => {
+          // TODO(HiDeoo) single key markup
+          return (
+            <span>
+              {chord.map((key, chordIndex) => {
+                return (
+                  <>
+                    <span>{key}</span>
+                    {chordIndex < chord.length - 1 && ' + '}
+                  </>
+                )
+              })}
+            </span>
+          )
+        })}
+      </div>
+    )
   })
 }
