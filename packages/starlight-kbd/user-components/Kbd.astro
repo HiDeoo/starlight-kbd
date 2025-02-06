@@ -1,7 +1,7 @@
 ---
 import config from 'virtual:starlight-kbd/config'
 
-import { parseKbd } from '../libs/kbd'
+import { getKbdFromString, getKbdLabel } from '../libs/kbd'
 
 export type Props = Record<string, string>
 
@@ -15,15 +15,14 @@ if (!defaultKbd) {
 
 {
   config.types.map((type) => {
-    const kbd = parseKbd(Astro.props[type.id] ?? defaultKbd)
+    const kbd = getKbdFromString(Astro.props[type.id] ?? defaultKbd)
 
     const dataAttributes: DOMStringMap = { 'data-sl-kbd-type': type.id }
     if (type.id === config.defaultType) dataAttributes['data-sl-kbd-active'] = ''
 
     return (
       <span {...dataAttributes}>
-        {/* // TODO(HiDeoo) a11y label */}
-        <span class="sr-only">Temporary alternate text</span>
+        <span class="sr-only">{getKbdLabel(kbd)}</span>
         {kbd.map((chord) => {
           return (
             <kbd aria-hidden="true" class="sl-kbd-chord">
