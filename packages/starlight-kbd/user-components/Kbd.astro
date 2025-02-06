@@ -22,21 +22,15 @@ if (!defaultKbd) {
 
     return (
       <span {...dataAttributes}>
-        {kbd.map((chord, chordIndex) => {
-          // TODO(HiDeoo) chord separator
-          // TODO(HiDeoo) chord separator a11y
+        {/* // TODO(HiDeoo) a11y label */}
+        <span class="sr-only">Temporary alternate text</span>
+        {kbd.map((chord) => {
           return (
-            <kbd class="sl-kbd-chord">
-              {chord.map((key, keyIndex) => {
+            <kbd aria-hidden="true" class="sl-kbd-chord">
+              {chord.map((key) => {
                 // TODO(HiDeoo) key separator a11y
-                return (
-                  <>
-                    <kbd>{key}</kbd>
-                    {keyIndex < chord.length - 1 && ' + '}
-                  </>
-                )
+                return <kbd>{key}</kbd>
               })}
-              {chordIndex < kbd.length - 1 && ' | '}
             </kbd>
           )
         })}
@@ -46,7 +40,7 @@ if (!defaultKbd) {
 }
 
 <style>
-  span:not([data-sl-kbd-active]) {
+  span[data-sl-kbd-type]:not([data-sl-kbd-active]) {
     display: none;
   }
 
