@@ -27,10 +27,9 @@ if (!defaultKbd) {
         {kbd.map((chord) => {
           return (
             <kbd aria-hidden="true" class="sl-kbd-chord">
-              {chord.map((key) => {
-                // TODO(HiDeoo) key separator a11y
-                return <kbd>{key}</kbd>
-              })}
+              {chord.map((key) => (
+                <kbd>{key}</kbd>
+              ))}
             </kbd>
           )
         })}
@@ -44,9 +43,8 @@ if (!defaultKbd) {
     display: none;
   }
 
-  .sl-kbd-chord {
-    /* // FIXME(HiDeoo)   */
-    margin-inline-end: 1rem;
+  .sl-kbd-chord:has(+ .sl-kbd-chord) {
+    margin-inline-end: 0.5rem;
   }
 
   .sl-kbd-chord kbd {
@@ -55,6 +53,7 @@ if (!defaultKbd) {
     border-radius: 4px;
     font-family: var(--sl-font-system-mono);
     font-size: var(--sl-text-xs);
+    margin-inline: 0.125rem;
     padding: 0.125rem 0.3125rem;
   }
 </style>
