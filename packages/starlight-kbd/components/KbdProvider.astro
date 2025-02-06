@@ -1,0 +1,26 @@
+<script is:inline>
+  window.StarlightKbdProvider = (() => {
+    const type = typeof localStorage !== 'undefined' && localStorage.getItem('sl-kbd-type')
+    return {
+      updateKbds() {
+        // TODO(HiDeoo) Test with multiple selects
+
+        for (const select of document.querySelectorAll('starlight-kbd-select select')) {
+          const isKnownType = Array.from(select.options).some((option) => option.value === type)
+          if (!isKnownType) return
+          select.value = type
+        }
+
+        requestAnimationFrame(() => {
+          for (const kbd of document.querySelectorAll('[data-sl-kbd-type]')) {
+            if (kbd.getAttribute('data-sl-kbd-type') === type) {
+              kbd.setAttribute('data-sl-kbd-active', '')
+            } else {
+              kbd.removeAttribute('data-sl-kbd-active')
+            }
+          }
+        })
+      },
+    }
+  })()
+</script>

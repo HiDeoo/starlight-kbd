@@ -1,0 +1,9 @@
+---
+import Default from '@astrojs/starlight/components/ThemeProvider.astro'
+import type { Props } from '@astrojs/starlight/props'
+
+import KbdProvider from '../components/KbdProvider.astro'
+---
+
+<Default {...Astro.props}><slot /></Default>
+<KbdProvider />

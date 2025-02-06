@@ -13,18 +13,20 @@ if (!defaultKbd) {
 }
 ---
 
-<div>KBD</div>
-
 {
   config.types.map((type) => {
     const kbd = parseKbd(Astro.props[type.id] ?? defaultKbd)
+
+    const dataAttributes: DOMStringMap = { 'data-sl-kbd-type': type.id }
+    if (type.id === config.defaultType) dataAttributes['data-sl-kbd-active'] = ''
+
     return (
-      <div>
+      <span {...dataAttributes}>
         {kbd.map((chord, chordIndex) => {
           // TODO(HiDeoo) chord separator
           // TODO(HiDeoo) chord separator a11y
           return (
-            <kbd>
+            <kbd class="sl-kbd-chord">
               {chord.map((key, keyIndex) => {
                 // TODO(HiDeoo) key separator a11y
                 return (
@@ -38,7 +40,20 @@ if (!defaultKbd) {
             </kbd>
           )
         })}
-      </div>
+      </span>
     )
   })
 }
+
+<style>
+  span:not([data-sl-kbd-active]) {
+    display: none;
+  }
+
+  .sl-kbd-chord {
+    /* // FIXME(HiDeoo)   */
+    background-color: red;
+    /* // FIXME(HiDeoo)   */
+    margin-inline-end: 1rem;
+  }
+</style>

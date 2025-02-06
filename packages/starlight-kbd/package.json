@@ -8,8 +8,10 @@
   "exports": {
     ".": "./index.ts",
     "./components": "./user-components/index.ts",
+    "./components/KbdProvider.astro": "./components/starlight/KbdProvider.astro",
     "./components/KbdSelect.astro": "./components/starlight/KbdSelect.astro",
     "./overrides/ThemeSelect.astro": "./overrides/ThemeSelect.astro",
+    "./overrides/ThemeProvider.astro": "./overrides/ThemeProvider.astro",
     "./package.json": "./package.json"
   },
   "scripts": {
