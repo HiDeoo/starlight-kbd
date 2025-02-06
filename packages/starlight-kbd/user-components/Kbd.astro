@@ -52,8 +52,15 @@ if (!defaultKbd) {
 
   .sl-kbd-chord {
     /* // FIXME(HiDeoo)   */
-    background-color: red;
-    /* // FIXME(HiDeoo)   */
     margin-inline-end: 1rem;
+  }
+
+  .sl-kbd-chord kbd {
+    background-color: var(--sl-color-gray-6);
+    border: 1px solid var(--sl-color-gray-4);
+    border-radius: 4px;
+    font-family: var(--sl-font-system-mono);
+    font-size: var(--sl-text-xs);
+    padding: 0.125rem 0.3125rem;
   }
 </style>
