@@ -17,10 +17,11 @@
   "scripts": {
     "test": "pnpm test:unit && pnpm test:e2e",
     "test:unit": "vitest",
-    "test:e2e": "echo \"Error: no E2E test implemented.\" && exit 1",
+    "test:e2e": "playwright install --with-deps chromium && playwright test",
     "lint": "eslint . --cache --max-warnings=0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.50.1",
     "vitest": "^3.0.5"
   },
   "peerDependencies": {
