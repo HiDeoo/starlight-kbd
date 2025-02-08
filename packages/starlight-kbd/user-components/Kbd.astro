@@ -12,7 +12,6 @@ if (!defaultKbd) {
   throw new Error(`No default kbd type found in config`)
 }
 
-// TODO(HiDeoo) test
 /**
  * The restoration script is inlined to avoid a flash of invalid active kbd type and is only included once per page.
  * We keep track of whether the script has been rendered using a variable stored using `Astro.locals` with an untyped
