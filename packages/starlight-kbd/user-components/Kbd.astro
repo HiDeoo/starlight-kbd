@@ -23,13 +23,16 @@ if (!defaultKbd) {
     return (
       <span {...dataAttributes}>
         <span class="sr-only">{getKbdLabel(kbd)}</span>
-        {kbd.map((chord) => {
+        {kbd.map((chord, chordIndex) => {
           return (
-            <kbd aria-hidden="true" class="sl-kbd-chord">
-              {chord.map((key) => (
-                <kbd>{key}</kbd>
-              ))}
-            </kbd>
+            <Fragment>
+              <kbd aria-hidden="true" class="sl-kbd-chord">
+                {chord.map((key) => (
+                  <kbd>{key}</kbd>
+                ))}
+              </kbd>
+              {chordIndex < kbd.length - 1 && ' '}
+            </Fragment>
           )
         })}
       </span>
@@ -43,7 +46,7 @@ if (!defaultKbd) {
   }
 
   .sl-kbd-chord:has(+ .sl-kbd-chord) {
-    margin-inline-end: 0.5rem;
+    margin-inline-end: 0.375rem;
   }
 
   .sl-kbd-chord kbd {
