@@ -7,14 +7,15 @@ import { Icon } from '@astrojs/starlight/components'
 
 interface Props {
   label: string
-  value: string
-  width?: string
   options: {
     label: string
     value: string
     selected: boolean
   }[]
+  value: string
 }
+
+const { label, options, value } = Astro.props
 
 /**
  * The `autocomplete="off"` attribute is used to prevent the browser from automatically selecting a
@@ -26,8 +27,8 @@ interface Props {
  */
 ---
 
-<label style={`--sl-select-width: ${Astro.props.width}`}>
-  <span class="sr-only">{Astro.props.label}</span>
+<label class="not-content">
+  <span class="sr-only">{label}</span>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     class="icon label-icon"
@@ -41,14 +42,10 @@ interface Props {
     >
     </path>
   </svg>
-  <select value={Astro.props.value} autocomplete="off">
-    {
-      Astro.props.options.map(({ value, selected, label }) => (
-        <option value={value} selected={selected} set:html={label} />
-      ))
-    }
+  <select autocomplete="off" value={value}>
+    {options.map(({ value, selected, label }) => <option value={value} selected={selected} set:html={label} />)}
   </select>
-  <Icon name="down-caret" class="icon caret" />
+  <Icon class="icon caret" name="down-caret" />
 </label>
 
 <style>
@@ -56,26 +53,31 @@ interface Props {
     --sl-label-icon-size: 1rem;
     --sl-caret-size: 1.25rem;
     --sl-inline-padding: 0.5rem;
-    position: relative;
-    display: flex;
+
     align-items: center;
-    gap: 0.25rem;
     color: var(--sl-color-gray-1);
+    display: inline-flex;
+    gap: 0.25rem;
+    position: relative;
   }
 
-  label:hover {
+  label:hover:not(:where(.sl-markdown-content *)) {
     color: var(--sl-color-gray-2);
   }
 
+  :global(.sl-markdown-content) label:hover {
+    color: var(--sl-color-text-accent);
+  }
+
   .icon {
+    color: var(--sl-icon-color);
     font-size: var(--sl-icon-size, 1em);
     height: 1em;
-    width: 1em;
-    color: var(--sl-icon-color);
     pointer-events: none;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    width: 1em;
   }
 
   .label-icon {
@@ -83,23 +85,39 @@ interface Props {
     inset-inline-start: 0;
   }
 
+  :global(.sl-markdown-content) .label-icon {
+    left: var(--sl-inline-padding);
+  }
+
   .caret {
     font-size: var(--sl-caret-size);
     inset-inline-end: 0;
   }
 
+  :global(.sl-markdown-content) .caret {
+    right: var(--sl-inline-padding);
+  }
+
   select {
-    border: 0;
-    padding-block: 0.625rem;
-    padding-inline: calc(var(--sl-label-icon-size) + var(--sl-inline-padding) + 0.25rem)
-      calc(var(--sl-caret-size) + var(--sl-inline-padding) + 0.25rem);
-    margin-inline: calc(var(--sl-inline-padding) * -1);
-    width: calc(var(--sl-select-width) + var(--sl-inline-padding) * 2);
+    appearance: none;
     background-color: transparent;
-    text-overflow: ellipsis;
+    border: 0;
     color: inherit;
     cursor: pointer;
-    appearance: none;
+    padding-block: 0.25rem;
+    padding-inline: calc(var(--sl-label-icon-size) + var(--sl-inline-padding) + 0.25rem)
+      calc(var(--sl-caret-size) + var(--sl-inline-padding) + 0.25rem);
+    text-overflow: ellipsis;
+  }
+
+  :global(.sl-markdown-content) select {
+    border: 1px solid var(--sl-color-white);
+    border-radius: 999rem;
+    outline-offset: 0.1875rem;
+  }
+
+  :global(.sl-markdown-content) label:hover select {
+    border-color: var(--sl-color-text-accent);
   }
 
   option {
@@ -111,5 +129,10 @@ interface Props {
     select {
       font-size: var(--sl-text-sm);
     }
+  }
+
+  select:not(:where(.sl-markdown-content *)) {
+    margin-inline: calc(var(--sl-inline-padding) * -1);
+    padding-block: 0.625rem;
   }
 </style>

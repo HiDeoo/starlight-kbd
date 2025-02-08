@@ -4,7 +4,6 @@ import config from 'virtual:starlight-kbd/config'
 import Select from './Select.astro'
 
 // TODO(HiDeoo) label
-// TODO(HiDeoo) width/coud it be CSS property?
 
 let value = ''
 const options = config.types.map((type) => {
@@ -18,7 +17,7 @@ const options = config.types.map((type) => {
 ---
 
 <starlight-kbd-select>
-  <Select label={Astro.locals.t('themeSelect.accessibleLabel')} {options} {value} width="6.25em" />
+  <Select label={Astro.locals.t('themeSelect.accessibleLabel')} {options} {value} />
 </starlight-kbd-select>
 
 <script is:inline>
@@ -51,3 +50,9 @@ const options = config.types.map((type) => {
     },
   )
 </script>
+
+<style>
+  :global(.sl-markdown-content) starlight-kbd-select {
+    display: inline-block;
+  }
+</style>
