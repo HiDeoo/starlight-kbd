@@ -1,7 +1,9 @@
 import { expect, test } from './test'
 
-test('restores shortcuts', async ({ page, testPage }) => {
+test('restores select and shortcuts', async ({ page, testPage }) => {
   await testPage.goto('basics')
+
+  expect(await testPage.getGlobalKbdSelect().inputValue()).toBe('mac')
 
   await expect(testPage.getNthActiveKbd(1)).toContainText('CommandM')
   await expect(testPage.getNthActiveKbdNthChord(2, 1)).toHaveText('CommandK')
@@ -14,6 +16,8 @@ test('restores shortcuts', async ({ page, testPage }) => {
   await expect(testPage.getNthActiveKbdNthChord(2, 2)).toHaveText('ControlW')
 
   await page.reload()
+
+  expect(await testPage.getGlobalKbdSelect().inputValue()).toBe('windows')
 
   await expect(testPage.getNthActiveKbd(1)).toContainText('ControlW')
   await expect(testPage.getNthActiveKbdNthChord(2, 1)).toHaveText('ControlK')

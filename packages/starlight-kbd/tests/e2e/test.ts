@@ -31,6 +31,10 @@ export class TestPage {
   }
 
   getGlobalKbdSelect() {
-    return this.page.locator('starlight-kbd-select select').first()
+    return this.page.locator('header starlight-kbd-select select').first()
+  }
+
+  getUserKbdSelect() {
+    return this.page.locator('.sl-markdown-content starlight-kbd-select select').first()
   }
 }

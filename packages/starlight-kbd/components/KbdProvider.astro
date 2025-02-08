@@ -1,9 +1,7 @@
 <script is:inline>
   window.StarlightKbdProvider = (() => {
-    const type = typeof localStorage !== 'undefined' && localStorage.getItem('sl-kbd-type')
     return {
-      updateKbdSelects() {
-        // TODO(HiDeoo) Test with multiple selects
+      updateKbdSelects(type) {
         for (const select of document.querySelectorAll('starlight-kbd-select select')) {
           const isKnownType = Array.from(select.options).some((option) => option.value === type)
           if (!isKnownType) return

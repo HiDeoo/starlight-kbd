@@ -21,7 +21,7 @@ const options = config.types.map((type) => {
 </starlight-kbd-select>
 
 <script is:inline>
-  StarlightKbdProvider.updateKbdSelects()
+  StarlightKbdProvider.updateKbdSelects(typeof localStorage !== 'undefined' && localStorage.getItem('sl-kbd-type'))
 </script>
 
 <script>
@@ -33,6 +33,8 @@ const options = config.types.map((type) => {
 
         this.querySelector('select')?.addEventListener('change', (event) => {
           if (!(event.currentTarget instanceof HTMLSelectElement)) return
+
+          StarlightKbdProvider.updateKbdSelects(event.currentTarget.value)
 
           for (const kbd of document.querySelectorAll('[data-sl-kbd-type]')) {
             if (kbd.getAttribute('data-sl-kbd-type') === event.currentTarget.value) {
