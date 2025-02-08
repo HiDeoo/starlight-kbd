@@ -23,7 +23,7 @@ const options = config.types.map((type) => {
 </starlight-kbd-select>
 
 <script is:inline>
-  StarlightKbdProvider.updateKbds()
+  StarlightKbdProvider.updateKbdSelects()
 </script>
 
 <script>
@@ -32,6 +32,7 @@ const options = config.types.map((type) => {
     class StarlightKbdSelect extends HTMLElement {
       constructor() {
         super()
+
         this.querySelector('select')?.addEventListener('change', (event) => {
           if (!(event.currentTarget instanceof HTMLSelectElement)) return
 

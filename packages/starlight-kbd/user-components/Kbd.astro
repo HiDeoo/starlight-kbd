@@ -11,34 +11,74 @@ if (!defaultKbd) {
   // TODO(HiDeoo)
   throw new Error(`No default kbd type found in config`)
 }
+
+// TODO(HiDeoo) test
+/**
+ * The restoration script is inlined to avoid a flash of invalid active kbd type and is only included once per page.
+ * We keep track of whether the script has been rendered using a variable stored using `Astro.locals` with an untyped
+ * symbol to avoid users to get autocomplete for it and also avoid potential clashes with user-defined variables.
+ */
+const didRenderKbdRestoreScriptSymbol = Symbol.for('starlight-kbd:did-render-restore-script')
+// @ts-expect-error - See above
+const shouldRenderKbdRestoreScript = Astro.locals[didRenderKbdRestoreScriptSymbol] !== true
+// @ts-expect-error - See above
+Astro.locals[didRenderKbdRestoreScriptSymbol] = true
 ---
 
 {
-  config.types.map((type) => {
-    const kbd = getKbdFromString(Astro.props[type.id] ?? defaultKbd)
-
-    const dataAttributes: DOMStringMap = { 'data-sl-kbd-type': type.id }
-    if (type.id === config.defaultType) dataAttributes['data-sl-kbd-active'] = ''
-
-    return (
-      <span {...dataAttributes}>
-        <span class="sr-only">{getKbdLabel(kbd)}</span>
-        {kbd.map((chord, chordIndex) => {
-          return (
-            <Fragment>
-              <kbd aria-hidden="true" class="sl-kbd-chord">
-                {chord.map((key) => (
-                  <kbd>{key}</kbd>
-                ))}
-              </kbd>
-              {chordIndex < kbd.length - 1 && ' '}
-            </Fragment>
-          )
-        })}
-      </span>
-    )
-  })
+  shouldRenderKbdRestoreScript && (
+    <script is:inline>
+      {customElements.define(
+        'starlight-kbd-restore',
+        class StarlightKbdRestore extends HTMLElement {
+          connectedCallback() {
+            const kbd = this.closest('starlight-kbd')
+            if (!(kbd instanceof HTMLElement) || typeof localStorage === 'undefined') return
+            const type = typeof localStorage !== 'undefined' && localStorage.getItem('sl-kbd-type')
+            if (!type) return
+            for (const kbd of document.querySelectorAll('[data-sl-kbd-type]')) {
+              if (kbd.getAttribute('data-sl-kbd-type') === type) {
+                kbd.setAttribute('data-sl-kbd-active', '')
+              } else {
+                kbd.removeAttribute('data-sl-kbd-active')
+              }
+            }
+          }
+        },
+      )}
+    </script>
+  )
 }
+
+<starlight-kbd>
+  {
+    config.types.map((type) => {
+      const kbd = getKbdFromString(Astro.props[type.id] ?? defaultKbd)
+
+      const dataAttributes: DOMStringMap = { 'data-sl-kbd-type': type.id }
+      if (type.id === config.defaultType) dataAttributes['data-sl-kbd-active'] = ''
+
+      return (
+        <span {...dataAttributes}>
+          <span class="sr-only">{getKbdLabel(kbd)}</span>
+          {kbd.map((chord, chordIndex) => {
+            return (
+              <Fragment>
+                <kbd aria-hidden="true" class="sl-kbd-chord">
+                  {chord.map((key) => (
+                    <kbd>{key}</kbd>
+                  ))}
+                </kbd>
+                {chordIndex < kbd.length - 1 && ' '}
+              </Fragment>
+            )
+          })}
+        </span>
+      )
+    })
+  }
+  <starlight-kbd-restore></starlight-kbd-restore>
+</starlight-kbd>
 
 <style>
   span[data-sl-kbd-type]:not([data-sl-kbd-active]) {
