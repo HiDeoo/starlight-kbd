@@ -3,28 +3,45 @@ import { z } from 'astro/zod'
 
 const configSchema = z
   .object({
-    // TODO(HiDeoo) comment
+    /**
+     * Whether the global keyboard type picker, allowing users to change the keyboard type, should be enabled.
+     *
+     * If set to `false`, the global keyboard type picker located next to the theme picker will not be displayed and
+     * it's up to the user to render the `KbdPicker` component where needed. This can be useful if only a specific page
+     * contains keyboard shortcuts.
+     *
+     * @default true
+     */
     globalPicker: z.boolean().default(true),
-    // TODO(HiDeoo) comment
-    // TODO(HiDeoo) name? types? platform?
+    /**
+     * Defines the available keyboard types that can be selected by the user.
+     */
     types: z
       .array(
         z.object({
-          // TODO(HiDeoo) comment
+          /**
+           * Unique identifier for the keyboard type that will be used to declare keyboard shortcuts.
+           */
           id: z.string(),
-          // TODO(HiDeoo) comment
           // TODO(HiDeoo) label i18n
+          /**
+           * Label displayed to the user in the keyboard type picker.
+           */
           label: z.string(),
-          // TODO(HiDeoo) comment
+          /**
+           * Whether the keyboard type should be selected by default.
+           *
+           * At least one keyboard type must be set as default and only one can be set as default.
+           *
+           * @default false
+           */
           default: z.boolean().default(false),
         }),
       )
       .min(1)
-      .refine(
-        (value) => value.filter((type) => type.default).length === 1,
-        // TODO(HiDeoo) Update message when the name is updated
-        { message: 'The `types` array must contain exactly one default type.' },
-      ),
+      .refine((value) => value.filter((type) => type.default).length === 1, {
+        message: 'The `types` array must contain exactly one default type.',
+      }),
   })
   .transform((value) => ({
     ...value,
