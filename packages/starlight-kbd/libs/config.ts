@@ -4,6 +4,8 @@ import { z } from 'astro/zod'
 const configSchema = z
   .object({
     // TODO(HiDeoo) comment
+    globalPicker: z.boolean().default(true),
+    // TODO(HiDeoo) comment
     // TODO(HiDeoo) name? types? platform?
     types: z
       .array(
