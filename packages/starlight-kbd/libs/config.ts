@@ -23,11 +23,13 @@ const configSchema = z
            * Unique identifier for the keyboard type that will be used to declare keyboard shortcuts.
            */
           id: z.string(),
-          // TODO(HiDeoo) label i18n
           /**
            * Label displayed to the user in the keyboard type picker.
+           *
+           * The value can be a string, or for multilingual sites, an object with values for each different locale.
+           * When using the object form, the keys must be BCP-47 tags (e.g. `en`, `ar`, or `zh-CN`).
            */
-          label: z.string(),
+          label: z.union([z.string(), z.record(z.string())]),
           /**
            * Whether the keyboard type should be selected by default.
            *

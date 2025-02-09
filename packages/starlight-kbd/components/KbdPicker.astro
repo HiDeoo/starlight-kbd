@@ -1,5 +1,8 @@
 ---
+import type { ComponentProps } from 'astro/types'
 import config from 'virtual:starlight-kbd/config'
+
+import { getTypeLabel } from '../libs/i18n'
 
 import Select from './Select.astro'
 
@@ -7,10 +10,10 @@ let value = ''
 const options = config.types.map((type) => {
   if (type.default) value = type.id
   return {
-    label: type.label,
+    label: getTypeLabel(Astro.currentLocale, type),
     selected: type.default,
     value: type.id,
-  }
+  } satisfies ComponentProps<typeof Select>['options'][number]
 })
 ---
 
