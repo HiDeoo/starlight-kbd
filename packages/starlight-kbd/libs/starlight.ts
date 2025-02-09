@@ -9,10 +9,14 @@ export function overrideStarlightComponent(
 ) {
   if (components?.[override]) {
     logger.warn(`It looks like you already have a \`${override}\` component override in your Starlight configuration.`)
-    // TODO(HiDeoo) update warning to indicate that the override can be disabled with an option when it exists
     logger.warn(
       `To use \`starlight-kbd\`, either remove your override or update it to render the content from \`starlight-kbd/components/${component}.astro\`.`,
     )
+    if (component === 'KbdPicker') {
+      logger.warn(
+        'You can also disable the global picker by setting the `globalPicker` configuration option to `false` in your `starlight-kbd` configuration.',
+      )
+    }
 
     return {}
   }
