@@ -1,13 +1,14 @@
 import { expect, test } from 'vitest'
 
 import { getKbdLabel } from '../../libs/kbd'
+import { Translations } from '../../translations'
 
 test('generates labels for keyboard shortcuts', () => {
-  expect(getKbdLabel([['a']])).toBe('a')
-  expect(getKbdLabel([['Control', 'a']])).toBe('Control + a')
-  expect(getKbdLabel([['Control', 'Shift', 'a']])).toBe('Control + Shift + a')
+  expect(getTestKbdLabel([['a']])).toBe('a')
+  expect(getTestKbdLabel([['Control', 'a']])).toBe('Control + a')
+  expect(getTestKbdLabel([['Control', 'Shift', 'a']])).toBe('Control + Shift + a')
   expect(
-    getKbdLabel([
+    getTestKbdLabel([
       ['Control', 'Shift', 'a'],
       ['Control', 'c'],
     ]),
@@ -15,16 +16,20 @@ test('generates labels for keyboard shortcuts', () => {
 })
 
 test('expands abbreviations', () => {
-  expect(getKbdLabel([['Ctrl']])).toBe('Control')
+  expect(getTestKbdLabel([['Ctrl']])).toBe('Control')
 })
 
 test('expands special characters', () => {
-  expect(getKbdLabel([['`']])).toBe('Backtick')
-  expect(getKbdLabel([['^']])).toBe('Caret')
-  expect(getKbdLabel([['\\']])).toBe('Backslash')
+  expect(getTestKbdLabel([['`']])).toBe('Backtick')
+  expect(getTestKbdLabel([['^']])).toBe('Caret')
+  expect(getTestKbdLabel([['\\']])).toBe('Backslash')
 })
 
 test('expands symbols', () => {
-  expect(getKbdLabel([['⌃']])).toBe('Control')
-  expect(getKbdLabel([['↑']])).toBe('Up Arrow')
+  expect(getTestKbdLabel([['⌃']])).toBe('Control')
+  expect(getTestKbdLabel([['↑']])).toBe('Up Arrow')
 })
+
+function getTestKbdLabel(kbd: Parameters<typeof getKbdLabel>[0]) {
+  return getKbdLabel(kbd, { then: Translations.en['starlightKbd.kbd.keywords.then'] })
+}

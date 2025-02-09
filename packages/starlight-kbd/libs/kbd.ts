@@ -87,9 +87,12 @@ export function getKbdFromString(kbd: string): Kbd {
     .map((chord) => chord.split(/\b\+/).filter(Boolean))
 }
 
-export function getKbdLabel(kbd: Kbd): string {
-  // TODO(HiDeoo) i18n then
-  return kbd.map((chord) => chord.map((key) => keyLabelReplacements[key] ?? key).join(' + ')).join(' then ')
+export function getKbdLabel(kbd: Kbd, keywords: KbdLabelKeywords): string {
+  return kbd.map((chord) => chord.map((key) => keyLabelReplacements[key] ?? key).join(' + ')).join(keywords.then)
 }
 
 type Kbd = string[][]
+
+interface KbdLabelKeywords {
+  then: string
+}

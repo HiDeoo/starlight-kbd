@@ -15,4 +15,9 @@ export default hideoo([
       '@typescript-eslint/no-empty-object-type': 'off',
     },
   },
+  {
+    rules: {
+      'unicorn/no-thenable': 'off',
+    },
+  },
 ])

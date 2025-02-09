@@ -59,7 +59,7 @@ Astro.locals[didRenderKbdRestoreScriptSymbol] = true
 
       return (
         <span {...dataAttributes}>
-          <span class="sr-only">{getKbdLabel(kbd)}</span>
+          <span class="sr-only">{getKbdLabel(kbd, { then: Astro.locals.t('starlightKbd.kbd.keywords.then') })}</span>
           {kbd.map((chord, chordIndex) => {
             return (
               <Fragment>
