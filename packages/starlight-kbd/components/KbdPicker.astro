@@ -16,17 +16,17 @@ const options = config.types.map((type) => {
 })
 ---
 
-<starlight-kbd-select>
+<starlight-kbd-picker>
   <Select label={Astro.locals.t('themeSelect.accessibleLabel')} {options} {value} />
-</starlight-kbd-select>
+</starlight-kbd-picker>
 
 <script is:inline>
-  StarlightKbdProvider.updateKbdSelects(typeof localStorage !== 'undefined' && localStorage.getItem('sl-kbd-type'))
+  StarlightKbdProvider.updateKbdPickers(typeof localStorage !== 'undefined' && localStorage.getItem('sl-kbd-type'))
 </script>
 
 <script>
   customElements.define(
-    'starlight-kbd-select',
+    'starlight-kbd-picker',
     class StarlightKbdSelect extends HTMLElement {
       constructor() {
         super()
@@ -34,7 +34,7 @@ const options = config.types.map((type) => {
         this.querySelector('select')?.addEventListener('change', (event) => {
           if (!(event.currentTarget instanceof HTMLSelectElement)) return
 
-          StarlightKbdProvider.updateKbdSelects(event.currentTarget.value)
+          StarlightKbdProvider.updateKbdPickers(event.currentTarget.value)
 
           for (const kbd of document.querySelectorAll('[data-sl-kbd-type]')) {
             if (kbd.getAttribute('data-sl-kbd-type') === event.currentTarget.value) {

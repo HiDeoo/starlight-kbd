@@ -1,8 +1,8 @@
 <script is:inline>
   window.StarlightKbdProvider = (() => {
     return {
-      updateKbdSelects(type) {
-        for (const select of document.querySelectorAll('starlight-kbd-select select')) {
+      updateKbdPickers(type) {
+        for (const select of document.querySelectorAll('starlight-kbd-picker select')) {
           const isKnownType = Array.from(select.options).some((option) => option.value === type)
           if (!isKnownType) return
           select.value = type

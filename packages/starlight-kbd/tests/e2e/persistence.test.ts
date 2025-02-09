@@ -1,15 +1,15 @@
 import { expect, test } from './test'
 
-test('restores select and shortcuts', async ({ page, testPage }) => {
+test('restores pickers and shortcuts', async ({ page, testPage }) => {
   await testPage.goto('basics')
 
-  expect(await testPage.getGlobalKbdSelect().inputValue()).toBe('mac')
+  expect(await testPage.getGlobalKbdPicker().inputValue()).toBe('mac')
 
   await expect(testPage.getNthActiveKbd(1)).toContainText('CommandM')
   await expect(testPage.getNthActiveKbdNthChord(2, 1)).toHaveText('CommandK')
   await expect(testPage.getNthActiveKbdNthChord(2, 2)).toHaveText('CommandM')
 
-  await testPage.getGlobalKbdSelect().selectOption('windows')
+  await testPage.getGlobalKbdPicker().selectOption('windows')
 
   await expect(testPage.getNthActiveKbd(1)).toContainText('ControlW')
   await expect(testPage.getNthActiveKbdNthChord(2, 1)).toHaveText('ControlK')
@@ -17,7 +17,7 @@ test('restores select and shortcuts', async ({ page, testPage }) => {
 
   await page.reload()
 
-  expect(await testPage.getGlobalKbdSelect().inputValue()).toBe('windows')
+  expect(await testPage.getGlobalKbdPicker().inputValue()).toBe('windows')
 
   await expect(testPage.getNthActiveKbd(1)).toContainText('ControlW')
   await expect(testPage.getNthActiveKbdNthChord(2, 1)).toHaveText('ControlK')

@@ -30,11 +30,11 @@ export class TestPage {
       .nth(chordTime - 1)
   }
 
-  getGlobalKbdSelect() {
-    return this.page.locator('header starlight-kbd-select select').first()
+  getGlobalKbdPicker() {
+    return this.page.locator('header starlight-kbd-picker select').first()
   }
 
-  getUserKbdSelect() {
-    return this.page.locator('.sl-markdown-content starlight-kbd-select select').first()
+  getUserKbdPicker() {
+    return this.page.locator('.sl-markdown-content starlight-kbd-picker select').first()
   }
 }

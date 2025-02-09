@@ -43,7 +43,7 @@ const { label, options, value } = Astro.props
     </path>
   </svg>
   <select autocomplete="off" value={value}>
-    {options.map(({ value, selected, label }) => <option value={value} selected={selected} set:html={label} />)}
+    {options.map(({ label, selected, value }) => <option {selected} set:html={label} {value} />)}
   </select>
   <Icon class="icon caret" name="down-caret" />
 </label>

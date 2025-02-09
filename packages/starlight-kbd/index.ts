@@ -17,8 +17,7 @@ export default function starlightKbd(userConfig: StarlightKbdUserConfig): Starli
           components: {
             ...starlightConfig.components,
             ...overrideStarlightComponent(starlightConfig.components, logger, 'ThemeProvider', 'KbdProvider'),
-            ...overrideStarlightComponent(starlightConfig.components, logger, 'ThemeSelect', 'KbdSelect'),
-            // TODO(HiDeoo) mobile KbdSelect
+            ...overrideStarlightComponent(starlightConfig.components, logger, 'ThemeSelect', 'KbdPicker'),
           },
         })
 
