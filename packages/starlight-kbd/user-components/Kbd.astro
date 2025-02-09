@@ -8,8 +8,12 @@ export type Props = Record<string, string>
 const defaultKbd = Astro.props[config.defaultType]
 
 if (!defaultKbd) {
-  // TODO(HiDeoo)
-  throw new Error(`No default kbd type found in config`)
+  throw new Error(
+    `No shortcut defined for default type \`${config.defaultType}\`, only got: ${Object.keys(Astro.props)
+      // eslint-disable-next-line prefer-template
+      .map((type) => '`' + type + '`')
+      .join(', ')}.`,
+  )
 }
 
 /**

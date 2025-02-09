@@ -1,5 +1,3 @@
-// TODO(HiDeoo) META or something?
-
 const keyLabelReplacements: Record<string, string> = {
   // Abbreviations
   Ctrl: 'Control',
