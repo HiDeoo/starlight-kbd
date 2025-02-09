@@ -3,8 +3,6 @@ import config from 'virtual:starlight-kbd/config'
 
 import Select from './Select.astro'
 
-// TODO(HiDeoo) label
-
 let value = ''
 const options = config.types.map((type) => {
   if (type.default) value = type.id
@@ -17,7 +15,7 @@ const options = config.types.map((type) => {
 ---
 
 <starlight-kbd-picker>
-  <Select label={Astro.locals.t('themeSelect.accessibleLabel')} {options} {value} />
+  <Select label={Astro.locals.t('starlightKbd.kbdPicker.accessibleLabel')} {options} {value} />
 </starlight-kbd-picker>
 
 <script is:inline>

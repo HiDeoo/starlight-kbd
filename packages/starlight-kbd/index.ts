@@ -3,6 +3,7 @@ import type { StarlightPlugin } from '@astrojs/starlight/types'
 import { type StarlightKbdConfig, type StarlightKbdUserConfig, validateConfig } from './libs/config'
 import { overrideStarlightComponent } from './libs/starlight'
 import { vitePluginStarlightKbdConfig } from './libs/vite'
+import { Translations } from './translations'
 
 export type { StarlightKbdConfig, StarlightKbdUserConfig }
 
@@ -12,7 +13,15 @@ export default function starlightKbd(userConfig: StarlightKbdUserConfig): Starli
   return {
     name: 'starlight-kbd',
     hooks: {
-      setup: ({ addIntegration, config: starlightConfig, logger, updateConfig: updateStarlightConfig }) => {
+      setup: ({
+        addIntegration,
+        config: starlightConfig,
+        injectTranslations,
+        logger,
+        updateConfig: updateStarlightConfig,
+      }) => {
+        injectTranslations(Translations)
+
         updateStarlightConfig({
           components: {
             ...starlightConfig.components,
