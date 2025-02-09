@@ -101,4 +101,30 @@ Astro.locals[didRenderKbdRestoreScriptSymbol] = true
     margin-inline: 0.125rem;
     padding: 0.125rem 0.3125rem;
   }
+
+  :global(.starlight-aside) .sl-kbd-chord kbd {
+    border-color: var(--sl-color-asides-border);
+  }
+
+  :global(.starlight-aside--note) .sl-kbd-chord kbd {
+    background-color: var(--sl-color-blue-low);
+  }
+
+  :global(.starlight-aside--tip) .sl-kbd-chord kbd {
+    background-color: var(--sl-color-purple-low);
+  }
+
+  :global(.starlight-aside--caution) .sl-kbd-chord kbd {
+    background-color: var(--sl-color-orange-low);
+  }
+
+  :global(.starlight-aside--danger) .sl-kbd-chord kbd {
+    background-color: var(--sl-color-red-low);
+  }
+
+  @supports (background-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 10%, transparent)) {
+    :global(.sl-markdown-content .starlight-aside) .sl-kbd-chord kbd {
+      background-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 10%, transparent);
+    }
+  }
 </style>
