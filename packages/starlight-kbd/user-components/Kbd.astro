@@ -67,11 +67,8 @@ Astro.locals[didRenderKbdRestoreScriptSymbol] = true
           {kbd.map((chord, chordIndex) => {
             return (
               <Fragment>
-                <kbd aria-hidden="true" class="sl-kbd-chord">
-                  {chord.map((key) => (
-                    <kbd>{key}</kbd>
-                  ))}
-                </kbd>
+                {/* prettier-ignore */}
+                <kbd aria-hidden="true" class="sl-kbd-chord">{chord.map((key) => <kbd>{key}</kbd>)}</kbd>
                 {chordIndex < kbd.length - 1 && ' '}
               </Fragment>
             )
