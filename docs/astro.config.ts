@@ -5,7 +5,7 @@ import starlightKbd from 'starlight-kbd'
 export default defineConfig({
   integrations: [
     starlight({
-      description: '// TODO(HiDeoo) ',
+      description: 'Starlight plugin to quickly and easily document keyboard shortcuts.',
       editLink: {
         baseUrl: 'https://github.com/HiDeoo/starlight-kbd/edit/main/docs/',
       },
@@ -31,11 +31,10 @@ export default defineConfig({
           label: 'Components',
           autogenerate: { directory: 'components' },
         },
-        // TODO(HiDeoo)
-        // {
-        //   label: 'Resources',
-        //   items: [{ label: 'Plugins and Tools', slug: 'resources/starlight' }],
-        // },
+        {
+          label: 'Resources',
+          items: [{ label: 'Plugins and Tools', slug: 'resources/starlight' }],
+        },
         'demo',
       ],
       social: {
