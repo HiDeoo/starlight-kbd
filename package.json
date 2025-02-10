@@ -2,7 +2,7 @@
   "name": "starlight-kbd-monorepo",
   "version": "0.0.1",
   "license": "MIT",
-  "description": "// TODO(HiDeoo)",
+  "description": "Starlight plugin to quickly and easily document keyboard shortcuts.",
   "author": "HiDeoo <github@hideoo.dev> (https://hideoo.dev)",
   "type": "module",
   "scripts": {
@@ -31,7 +31,12 @@
   "private": true,
   "sideEffects": false,
   "keywords": [
-    "// TODO(HiDeoo)"
+    "starlight",
+    "plugin",
+    "keyboard",
+    "shortcut",
+    "documentation",
+    "astro"
   ],
   "homepage": "https://github.com/HiDeoo/starlight-kbd",
   "repository": {
