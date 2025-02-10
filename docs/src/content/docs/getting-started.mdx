@@ -1,5 +1,94 @@
 ---
-title: // TODO(HiDeoo)
+title: Getting Started
+description: Learn how to quickly and easily document keyboard shortcuts in your project using the Starlight Kbd plugin.
 ---
 
-Hello
+A [Starlight](https://starlight.astro.build) plugin to quickly and easily document keyboard shortcuts in your project:
+
+- Custom keyboard types, e.g. platform-specific, keyboard layout-specific, etc.
+- Global or standalone keyboard type picker to switch between different types of keyboard shortcuts
+- Prefered keyboard type persisted across pages
+- Improved accessibility for screen readers
+
+Check out the [demo page](/demo/) for a preview of the plugin in action.
+
+## Prerequisites
+
+You will need to have a Starlight website set up.
+If you don't have one yet, you can follow the ["Getting Started"](https://starlight.astro.build/getting-started) guide in the Starlight docs to create one.
+
+## Installation
+
+import { Steps } from '@astrojs/starlight/components'
+import { PackageManagers } from '@hideoo/starlight-plugins-docs-components'
+import Preview from '../../components/Preview.astro'
+import { Kbd } from 'starlight-kbd/components'
+
+<Steps>
+
+1. Starlight Kbd is a Starlight [plugin](https://starlight.astro.build/reference/plugins/).
+   Install it using your favorite package manager:
+
+   <PackageManagers pkg="starlight-kbd" />
+
+2. Configure the plugin in your Starlight [configuration](https://starlight.astro.build/reference/configuration/#plugins) in the `astro.config.mjs` file by specifying the type of keyboard shortcuts you want to use.
+
+   The following example shows how to configure two types of keyboard shortcuts: macOS and Windows.
+
+   ```js ins={5,10-17}
+   // astro.config.mjs
+   // @ts-check
+   import starlight from '@astrojs/starlight'
+   import { defineConfig } from 'astro/config'
+   import starlightKbd from 'starlight-kbd'
+
+   export default defineConfig({
+     integrations: [
+       starlight({
+         plugins: [
+           starlightKbd({
+             types: [
+               { id: 'mac', label: 'macOS', default: true },
+               { id: 'windows', label: 'Windows' },
+             ],
+           }),
+         ],
+         title: 'My Docs',
+       }),
+     ],
+   })
+   ```
+
+3. Use the provided `<Kbd>` component to document keyboard shortcuts.
+
+   ```mdx title="src/content/docs/index.mdx" ins={7-9}
+   ---
+   title: My docs
+   ---
+
+   Welcome to my project!
+
+   import { Kbd } from 'starlight-kbd/components'
+
+   Use <Kbd mac="Command+S" windows="Control+S" /> to get started.
+   ```
+
+4. [Start the development server](https://starlight.astro.build/getting-started/#start-the-development-server) to preview the new shortcut and the keyboard type picker added next to the theme picker.
+
+   Using the previous example, the preview should look like this:
+
+   <Preview>
+
+   <Fragment slot="preview">
+     Welcome to my project! Use <Kbd mac="Command+S" windows="Control+S" linux="Control+S" /> to get started.
+   </Fragment>
+
+   </Preview>
+
+   :::tip[See it in action]
+   You can also use the keyboard type picker at the top of this page to switch between the different types of keyboard shortcuts.
+   :::
+
+</Steps>
+
+Check the [configuration reference](/configuration/) for more information on the available options, the [`<Kbd>` component reference](/components/kbd/) for more information on how to use it, and the [shortcut syntax guide](/guides/shortcut-syntax/) for details on how to write keyboard shortcuts.

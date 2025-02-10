@@ -19,31 +19,29 @@ export default defineConfig({
         }),
       ],
       sidebar: [
-        // TODO(HiDeoo)
-        // {
-        //   label: 'Start Here',
-        //   items: ['getting-started'],
-        // },
-        // {
-        //   label: 'Guides',
-        //   items: ['guides/actions', 'guides/i18n'],
-        // },
+        {
+          label: 'Start Here',
+          items: ['getting-started', 'configuration'],
+        },
+        {
+          label: 'Guides',
+          autogenerate: { directory: 'guides' },
+        },
+        {
+          label: 'Components',
+          autogenerate: { directory: 'components' },
+        },
         // TODO(HiDeoo)
         // {
         //   label: 'Resources',
         //   items: [{ label: 'Plugins and Tools', slug: 'resources/starlight' }],
         // },
-        // TODO(HiDeoo)
-        // {
-        //   label: 'Demo',
-        //   items: ['demo/video-guides', 'demo/video-courses'],
-        // },
+        'demo',
       ],
       social: {
         blueSky: 'https://bsky.app/profile/hideoo.dev',
         github: 'https://github.com/HiDeoo/starlight-kbd',
       },
-      // TODO(HiDeoo) casing here
       title: 'Starlight Kbd',
     }),
   ],

@@ -1,0 +1,54 @@
+---
+title: KbdPicker
+description: Learn how to display a keyboard type picker in your documentation.
+---
+
+import { KbdPicker } from 'starlight-kbd/components'
+
+To display a keyboard type picker in a page of your documentation, use the `<KbdPicker>` component.
+
+import Preview from '../../../components/Preview.astro'
+
+<Preview>
+
+<Fragment slot="preview">
+  <KbdPicker />
+</Fragment>
+
+</Preview>
+
+## Import
+
+```tsx
+import { KbdPicker } from 'starlight-kbd/components'
+```
+
+## Usage
+
+Use the `<KbdPicker>` component to display a keyboard type picker in a page of your documentation.
+
+Combined with the [`globalPicker`](/configuration/#globalpicker) configuration option, manually rendering the `<KbdPicker>` component can be useful if only one or a few pages of your documentation use keyboard shortcuts.
+
+<Preview>
+
+```mdx
+import { KbdPicker } from 'starlight-kbd/components'
+
+Use the following picker to switch between different keyboard types:
+
+<KbdPicker />
+```
+
+<Fragment slot="preview">
+
+Use the following picker to switch between different keyboard types:
+
+<KbdPicker />
+
+</Fragment>
+
+</Preview>
+
+## `<KbdPicker>` Props
+
+The `<KbdPicker>` component does not accept any props.

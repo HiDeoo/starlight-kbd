@@ -1,0 +1,99 @@
+---
+title: Configuration
+description: An overview of all the configuration options supported by the Starlight Kbd plugin.
+---
+
+The Starlight Kbd plugin can be configured inside the `astro.config.mjs` configuration file of your project:
+
+```js {12}
+// astro.config.mjs
+// @ts-check
+import starlight from '@astrojs/starlight'
+import { defineConfig } from 'astro/config'
+import starlightKbd from 'starlight-kbd'
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      plugins: [
+        starlightKbd({
+          // Configuration options go here.
+        }),
+      ],
+      title: 'My Docs',
+    }),
+  ],
+})
+```
+
+## Plugin configuration
+
+The Starlight Kbd plugin accepts the following configuration options:
+
+### `globalPicker`
+
+**Type:** `boolean`  
+**Default:** `true`
+
+Defines whether the global keyboard type picker, allowing users to switch between different keyboard types, should be displayed.
+
+If set to `false`, the global keyboard type picker located next to the theme picker will not be displayed and it's up to the user to render the [`<KbdPicker>` component](/components/kbdpicker/) where needed.
+This can be useful if only one or a few pages of your documentation use keyboard shortcuts.
+
+```js {2}
+starlightKbd({
+  globalPicker: false,
+})
+```
+
+### `types`
+
+**Type:** [`StarlightKbdTypesConfig`](#types-configuration)
+
+A list of keyboard types supported in your documentation.
+Check the ["Types configuration"](#types-configuration) section for more informations.
+
+## Types configuration
+
+Keyboard types can represent different operating systems or devices, such as macOS, Windows, or Linux keyboards.
+They can also represent different keyboard layouts, such as QWERTY or AZERTY, or even different keybindings like Vim or Emacs.
+
+Keyboard types can be configured using the `types` option of the Starlight Kbd plugin by providing an array of objects with at least an [`id`](#id) used to identify the type and a [`label`](#label) to display in the keyboard type picker.
+
+```js {3-5}
+starlightKbd({
+  types: [
+    { id: 'mac', label: 'macOS', default: true },
+    { id: 'windows', label: 'Windows' },
+    { id: 'linux', label: 'Linux' },
+  ],
+})
+```
+
+A type can be configured using the following options:
+
+### `id`
+
+**Type:** `string`  
+**Required**
+
+An unique identifier for the keyboard type that will be used to declare keyboard shortcuts with the [`<Kbd>` component](/components/kbd/).
+
+### `label`
+
+**Type:** `string`  
+**Required**
+
+A label displayed to the user in the keyboard type picker.
+
+The value can be a string, or for multilingual sites, an object with values for each different locale.
+When using the object form, the keys must be BCP-47 tags (e.g. `en`, `ar`, or `zh-CN`).
+
+### `default`
+
+**Type:** `boolean`  
+**Default:** `false`
+
+Whether the keyboard type should be selected by default.
+
+At least one keyboard type must be set as default and only one can be set as default.

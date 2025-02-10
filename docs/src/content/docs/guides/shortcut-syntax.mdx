@@ -1,0 +1,78 @@
+---
+title: Shortcut Syntax
+description: Learn about the syntax for documenting keyboard shortcuts used by the Starlight Kbd plugin.
+sidebar:
+  order: 1
+---
+
+import { Kbd } from 'starlight-kbd/components'
+import Preview from '../../../components/Preview.astro'
+
+Starlight Kbd supports a simple syntax for documenting keyboard shortcuts.
+This guide describes the format supported by the [`<Kbd>`](/components/kbd/) component and recommended practices.
+
+## Shortcuts
+
+A basic shortcut consists of one or more modifier keys followed by a regular key, all connected with `+` signs.
+
+<Preview>
+
+```mdx
+A shortcut with a single modifier key:
+
+<Kbd mac="Command+S" windows="Control+S" />
+
+A shortcut with multiple modifier keys:
+
+<Kbd mac="Command+Shift+S" windows="Control+Shift+S" />
+```
+
+<Fragment slot="preview">
+
+A shortcut with a single modifier key:
+
+<Kbd mac="Command+S" windows="Control+S" linux="Control+S" />
+
+A shortcut with multiple modifier keys:
+
+<Kbd mac="Command+Shift+S" windows="Control+Shift+S" linux="Control+Shift+S" />
+
+</Fragment>
+
+</Preview>
+
+## Chords
+
+Some commands require a sequence of keyboard combinations, also known as chords.
+These are represented by separating each combination with a space.
+
+<Preview>
+
+```mdx
+Press some keys and then press some more keys:
+
+<Kbd mac="Command+K Command+S" windows="Control+K Control+S" />
+```
+<Fragment slot="preview">
+
+Press some keys and then press some more keys:
+
+<Kbd mac="Command+K Command+S" windows="Control+K Control+S" linux="Control+K Control+S" />
+
+</Fragment>
+
+</Preview>
+
+## Recommendations
+
+When documenting keyboard shortcuts, consider these recommendations:
+
+- Be consistent and use the same key names throughout your documentation.
+  For example, stick to either `Control` or `Ctrl` but not both.
+
+- Avoid glyphs and use text for modifier keys.
+  For example, use `Command` instead of `⌘` which may not be obvious to all users.
+
+  :::note[Did you know?]
+  The Starlight Kbd plugin automatically expands common abbreviations for screen readers, e.g. the `⌘+K S` sequence is announced as "Command + K then S".
+  :::

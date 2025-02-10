@@ -1,0 +1,55 @@
+---
+title: Kbd
+description: Learn how to display keyboard shortcuts in your documentation.
+---
+
+import { Kbd } from 'starlight-kbd/components'
+
+To display keyboard shortcuts in your documentation, use the `<Kbd>` component.
+
+import Preview from '../../../components/Preview.astro'
+
+<Preview>
+
+<Fragment slot="preview">
+  <Kbd mac="Command+Shift+S" windows="Control+Shift+S" linux="Control+Shift+S" />
+</Fragment>
+
+</Preview>
+
+## Import
+
+```tsx
+import { Kbd } from 'starlight-kbd/components'
+```
+
+## Usage
+
+Use the `<Kbd>` component to display keyboard shortcuts in your documentation.
+
+Different shortcuts can be provided for all the supported [keyboard types](/configuration/#types-configuration) configured in your documentation.
+At least one shortcut matching the [`default`](/configuration/#default) keyboard type should be provided.
+
+When a keyboard type is not provided, the default keyboard type is used.
+
+<Preview>
+
+```mdx
+import { Kbd } from 'starlight-kbd/components'
+
+Use <Kbd mac="Command+S" windows="Control+S" /> to get started.
+```
+
+<Fragment slot="preview">
+
+Use <Kbd mac="Command+S" windows="Control+S" linux="Control+S" /> to get started.
+
+</Fragment>
+
+</Preview>
+
+Check the [shortcut syntax guide](/guides/shortcut-syntax/) for more information on how to write keyboard shortcuts.
+
+## `<Kbd>` Props
+
+The `<Kbd>` component accepts any number of props representing keyboard shortcuts for different [keyboard types](/configuration/#types-configuration) with at least one matching the [`default`](/configuration/#default) keyboard type.

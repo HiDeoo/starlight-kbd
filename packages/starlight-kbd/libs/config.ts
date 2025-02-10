@@ -4,11 +4,12 @@ import { z } from 'astro/zod'
 const configSchema = z
   .object({
     /**
-     * Whether the global keyboard type picker, allowing users to change the keyboard type, should be enabled.
+     * Whether the global keyboard type picker, allowing users to switch between different keyboard types, should be
+     * displayed.
      *
      * If set to `false`, the global keyboard type picker located next to the theme picker will not be displayed and
-     * it's up to the user to render the `KbdPicker` component where needed. This can be useful if only a specific page
-     * contains keyboard shortcuts.
+     * it's up to the user to render the `<KbdPicker>` component where needed. This can be useful if only one or a few
+     * pages of your documentation use keyboard shortcuts.
      *
      * @default true
      */
