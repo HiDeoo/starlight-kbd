@@ -7,4 +7,8 @@ export const Translations = {
     'starlightKbd.kbd.keywords.then': ' puis ',
     'starlightKbd.kbdPicker.accessibleLabel': 'Sélectionner le type de clavier',
   },
+  de: {
+    'starlightKbd.kbd.keywords.then': ' dann ',
+    'starlightKbd.kbdPicker.accessibleLabel': 'Tastaturtyp auswählen',
+  },
 }
