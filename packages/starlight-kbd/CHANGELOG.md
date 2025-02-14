@@ -1,5 +1,11 @@
 # starlight-kbd
 
+## 0.1.1
+
+### Patch Changes
+
+- [#3](https://github.com/HiDeoo/starlight-kbd/pull/3) [`0441914`](https://github.com/HiDeoo/starlight-kbd/commit/04419143a7ebcf2cd91eb8de336b2d5098937038) Thanks [@trueberryless](https://github.com/trueberryless)! - Adds German UI translations.
+
 ## 0.1.0
 
 ### Minor Changes
