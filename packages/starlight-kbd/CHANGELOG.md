@@ -1,5 +1,17 @@
 # starlight-kbd
 
+## 0.2.0
+
+### Minor Changes
+
+- [#5](https://github.com/HiDeoo/starlight-kbd/pull/5) [`423094a`](https://github.com/HiDeoo/starlight-kbd/commit/423094a408ddc4f16b917184d44155291881c302) Thanks [@HiDeoo](https://github.com/HiDeoo)! - ⚠️ **BREAKING CHANGE:** The minimum supported version of Starlight is now version `0.32.0`.
+
+  Please use the `@astrojs/upgrade` command to upgrade your project:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
 ## 0.1.1
 
 ### Patch Changes
