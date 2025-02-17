@@ -13,15 +13,10 @@ export default function starlightKbd(userConfig: StarlightKbdUserConfig): Starli
   return {
     name: 'starlight-kbd',
     hooks: {
-      setup: ({
-        addIntegration,
-        config: starlightConfig,
-        injectTranslations,
-        logger,
-        updateConfig: updateStarlightConfig,
-      }) => {
+      'i18n:setup': ({ injectTranslations }) => {
         injectTranslations(Translations)
-
+      },
+      'config:setup': ({ addIntegration, config: starlightConfig, logger, updateConfig: updateStarlightConfig }) => {
         updateStarlightConfig({
           components: {
             ...starlightConfig.components,

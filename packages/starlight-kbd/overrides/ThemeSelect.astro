@@ -1,9 +1,8 @@
 ---
 import Default from '@astrojs/starlight/components/ThemeSelect.astro'
-import type { Props } from '@astrojs/starlight/props'
 
 import KbdPicker from '../components/KbdPicker.astro'
 ---
 
 <KbdPicker />
-<Default {...Astro.props}><slot /></Default>
+<Default><slot /></Default>
