@@ -60,6 +60,8 @@ They can also represent different keyboard layouts, such as QWERTY or AZERTY, or
 
 Keyboard types can be configured using the `types` option of the Starlight Kbd plugin by providing an array of objects with at least an [`id`](#id) used to identify the type and a [`label`](#label) to display in the keyboard type picker.
 
+When no keyboard type has the `default` property set to `true`, the plugin will automatically detect the user's operating system on their first visit and select the appropriate keyboard type. The plugin looks for type IDs that match: 'mac' for macOS, 'windows' for Windows, and 'linux' for Linux systems.
+
 ```js {3-5}
 starlightKbd({
   types: [
@@ -69,6 +71,20 @@ starlightKbd({
   ],
 })
 ```
+
+You can also omit the `default` property to enable automatic OS detection:
+
+```js
+starlightKbd({
+  types: [
+    { id: 'mac', label: 'macOS' },
+    { id: 'windows', label: 'Windows' },
+    { id: 'linux', label: 'Linux' },
+  ],
+})
+```
+
+With this configuration, the plugin will automatically detect the user's operating system and select the appropriate keyboard type.
 
 A type can be configured using the following options:
 
@@ -96,4 +112,4 @@ When using the object form, the keys must be BCP-47 tags (e.g. `en`, `ar`, or `z
 
 Whether the keyboard type should be selected by default.
 
-At least one keyboard type must be set as default and only one can be set as default.
+Only one keyboard type can be set as default. If no default is specified, the plugin will automatically detect the user's operating system and select the appropriate keyboard type if available (e.g., 'mac', 'windows', or 'linux'). If autodetection fails or no matching type is found, the first keyboard type in the list will be used.

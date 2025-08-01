@@ -12,7 +12,7 @@ export default defineConfig({
       plugins: [
         starlightKbd({
           types: [
-            { id: 'mac', label: 'macOS', default: true },
+            { id: 'mac', label: 'macOS' },
             { id: 'windows', label: 'Windows' },
             { id: 'linux', label: 'Linux' },
           ],

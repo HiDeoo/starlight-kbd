@@ -6,23 +6,23 @@ import { getTypeLabel } from '../libs/i18n'
 
 import Select from './Select.astro'
 
-let value = ''
+// Don't set any initial value - let the client-side script handle it
+const value = ''
 const options = config.types.map((type) => {
-  if (type.default) value = type.id
   return {
     label: getTypeLabel(Astro.currentLocale, type),
-    selected: type.default,
+    selected: false, // No option is selected initially
     value: type.id,
   } satisfies ComponentProps<typeof Select>['options'][number]
 })
 ---
 
-<starlight-kbd-picker>
+<starlight-kbd-picker {...(config.defaultType ? { 'data-default-type': config.defaultType } : {})}>
   <Select label={Astro.locals.t('starlightKbd.kbdPicker.accessibleLabel')} {options} {value} />
 </starlight-kbd-picker>
 
 <script is:inline>
-  StarlightKbdProvider.updateKbdPickers(typeof localStorage !== 'undefined' && localStorage.getItem('sl-kbd-type'))
+  StarlightKbdProvider.initializeKbdPicker()
 </script>
 
 <script>

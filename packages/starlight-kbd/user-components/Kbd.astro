@@ -5,9 +5,9 @@ import { getKbdFromString, getKbdLabel } from '../libs/kbd'
 
 export type Props = Record<string, string>
 
-const defaultKbd = Astro.props[config.defaultType]
+const defaultKbd = config.defaultType ? Astro.props[config.defaultType] : null
 
-if (!defaultKbd) {
+if (config.defaultType && !defaultKbd) {
   throw new Error(
     `No shortcut defined for default type \`${config.defaultType}\`, only got: ${Object.keys(Astro.props)
       // eslint-disable-next-line prefer-template
@@ -37,8 +37,18 @@ Astro.locals[didRenderKbdRestoreScriptSymbol] = true
           connectedCallback() {
             const kbd = this.closest('starlight-kbd')
             if (!(kbd instanceof HTMLElement) || typeof localStorage === 'undefined') return
-            const type = typeof localStorage !== 'undefined' && localStorage.getItem('sl-kbd-type')
+            let type = typeof localStorage !== 'undefined' && localStorage.getItem('sl-kbd-type')
+
+            // If no stored type, try to autodetect
+            if (!type && window.StarlightKbdProvider) {
+              type = window.StarlightKbdProvider.autodetectKbdType()
+              if (type && typeof localStorage !== 'undefined') {
+                localStorage.setItem('sl-kbd-type', type)
+              }
+            }
+
             if (!type) return
+
             for (const kbd of document.querySelectorAll('[data-sl-kbd-type]')) {
               if (kbd.getAttribute('data-sl-kbd-type') === type) {
                 kbd.setAttribute('data-sl-kbd-active', '')
@@ -56,10 +66,10 @@ Astro.locals[didRenderKbdRestoreScriptSymbol] = true
 <starlight-kbd>
   {
     config.types.map((type) => {
-      const kbd = getKbdFromString(Astro.props[type.id] ?? defaultKbd)
+      const kbd = getKbdFromString(Astro.props[type.id] ?? defaultKbd ?? '')
 
       const dataAttributes: DOMStringMap = { 'data-sl-kbd-type': type.id }
-      if (type.id === config.defaultType) dataAttributes['data-sl-kbd-active'] = ''
+      if (config.defaultType && type.id === config.defaultType) dataAttributes['data-sl-kbd-active'] = ''
 
       return (
         <span {...dataAttributes}>

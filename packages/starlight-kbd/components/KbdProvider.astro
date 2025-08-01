@@ -8,6 +8,88 @@
           select.value = type
         }
       },
+
+      autodetectKbdType() {
+        const selects = document.querySelectorAll('starlight-kbd-picker select')
+        if (selects.length === 0) {
+          return null
+        }
+
+        const firstSelect = selects[0]
+        const availableOptions = Array.from(firstSelect.options).map((opt) => opt.value.toLowerCase())
+
+        // Check if any of the available options look like OS types we can detect
+        const hasOSTypes = availableOptions.some((type) => ['mac', 'windows', 'linux'].includes(type))
+
+        if (!hasOSTypes) {
+          return null
+        }
+
+        const platform = navigator.platform || navigator.userAgent
+        let detectedType = null
+
+        if (/Mac|iPhone|iPad|iPod/.test(platform)) {
+          const macIndex = availableOptions.findIndex((type) => type === 'mac')
+          if (macIndex !== -1) {
+            detectedType = firstSelect.options[macIndex].value
+          }
+        } else if (/Win/.test(platform)) {
+          const winIndex = availableOptions.findIndex((type) => type === 'windows')
+          if (winIndex !== -1) {
+            detectedType = firstSelect.options[winIndex].value
+          }
+        } else if (/Linux/.test(platform)) {
+          const linuxIndex = availableOptions.findIndex((type) => type === 'linux')
+          if (linuxIndex !== -1) {
+            detectedType = firstSelect.options[linuxIndex].value
+          }
+        }
+
+        return detectedType
+      },
+
+      initializeKbdPicker() {
+        // 1. Check localStorage first
+        const storedType = typeof localStorage !== 'undefined' && localStorage.getItem('sl-kbd-type')
+        if (storedType) {
+          this.updateKbdPickers(storedType)
+          return
+        }
+
+        // 2. Check for explicit default from config
+        const pickers = document.querySelectorAll('starlight-kbd-picker')
+        if (pickers.length > 0) {
+          const defaultType = pickers[0].getAttribute('data-default-type')
+          if (defaultType) {
+            this.updateKbdPickers(defaultType)
+            if (typeof localStorage !== 'undefined') {
+              localStorage.setItem('sl-kbd-type', defaultType)
+            }
+            return
+          }
+        }
+
+        // 3. No stored preference and no explicit default - try autodetect
+        const detectedType = this.autodetectKbdType()
+
+        let typeToUse = detectedType
+
+        // 4. If autodetection failed, use first available type
+        if (!typeToUse) {
+          const selects = document.querySelectorAll('starlight-kbd-picker select')
+          if (selects.length > 0 && selects[0].options.length > 0) {
+            typeToUse = selects[0].options[0].value
+          }
+        }
+
+        // 5. Apply and save the selected type
+        if (typeToUse) {
+          this.updateKbdPickers(typeToUse)
+          if (typeof localStorage !== 'undefined') {
+            localStorage.setItem('sl-kbd-type', typeToUse)
+          }
+        }
+      },
     }
   })()
 </script>
