@@ -1,5 +1,11 @@
 # starlight-kbd
 
+## 0.2.1
+
+### Patch Changes
+
+- [#9](https://github.com/HiDeoo/starlight-kbd/pull/9) [`f8bf857`](https://github.com/HiDeoo/starlight-kbd/commit/f8bf857db763e3885948bcfd737565c794e54233) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Setups trusted publishing using OpenID Connect (OIDC) authentication — no code changes.
+
 ## 0.2.0
 
 ### Minor Changes
