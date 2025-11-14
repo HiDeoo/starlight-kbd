@@ -34,7 +34,8 @@ const configSchema = z
           /**
            * Whether the keyboard type should be selected by default.
            *
-           * At least one keyboard type must be set as default and only one can be set as default.
+           * Only one keyboard type can be set as default. If no default is set,
+           * the plugin will attempt to autodetect the user's OS/browser.
            *
            * @default false
            */
@@ -42,14 +43,15 @@ const configSchema = z
         }),
       )
       .min(1)
-      .refine((value) => value.filter((type) => type.default).length === 1, {
-        message: 'The `types` array must contain exactly one default type.',
+      .refine((value) => value.filter((type) => type.default).length <= 1, {
+        message: 'The `types` array must contain at most one default type.',
       }),
   })
   .transform((value) => ({
     ...value,
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    defaultType: value.types.find((type) => type.default)!.id,
+    defaultType: value.types.find((type) => type.default)?.id,
+    // Note: We can't autodetect at build time since we don't know the user's OS
+    // Autodetection happens client-side in the browser
   }))
 
 export function validateConfig(userConfig: unknown): StarlightKbdConfig {
