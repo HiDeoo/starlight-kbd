@@ -37,7 +37,9 @@ Astro.locals[didRenderKbdRestoreScriptSymbol] = true
           connectedCallback() {
             const kbd = this.closest('starlight-kbd')
             if (!(kbd instanceof HTMLElement) || typeof localStorage === 'undefined') return
-            const type = typeof localStorage !== 'undefined' && localStorage.getItem('sl-kbd-type')
+            const type =
+              (typeof localStorage !== 'undefined' && localStorage.getItem('sl-kbd-type')) ??
+              StarlightKbdProvider.matchedType
             if (!type) return
             for (const kbd of document.querySelectorAll('[data-sl-kbd-type]')) {
               if (kbd.getAttribute('data-sl-kbd-type') === type) {

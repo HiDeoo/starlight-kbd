@@ -39,6 +39,8 @@ const configSchema = z
            * @default false
            */
           default: z.boolean().default(false),
+          // TODO(HiDeoo) documentation
+          detector: z.union([z.literal('apple'), z.literal('linux'), z.literal('windows')]).optional(),
         }),
       )
       .min(1)

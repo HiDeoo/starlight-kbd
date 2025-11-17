@@ -9,11 +9,15 @@ import Select from './Select.astro'
 let value = ''
 const options = config.types.map((type) => {
   if (type.default) value = type.id
-  return {
+  const option: ComponentProps<typeof Select>['options'][number] = {
     label: getTypeLabel(Astro.currentLocale, type),
     selected: type.default,
     value: type.id,
-  } satisfies ComponentProps<typeof Select>['options'][number]
+  }
+  if (type.detector) {
+    option.dataAttributes = { 'data-detector': type.detector }
+  }
+  return option
 })
 ---
 

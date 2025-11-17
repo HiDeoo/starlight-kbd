@@ -14,10 +14,21 @@ export const test = base.extend<{ testPage: TestPage }>({
 })
 
 export class TestPage {
-  constructor(private readonly page: Page) {}
+  private readonly page: Page
 
-  goto(path: string, locale?: string) {
-    return this.page.goto(`/${locale ? `${locale}/` : ''}tests/${path}`)
+  constructor(page: Page) {
+    this.page = page
+  }
+
+  async goto(path: string, options?: { locale?: string; platform?: string }) {
+    await this.page.addInitScript<{ platform: string }>(
+      ({ platform }) => {
+        Object.defineProperty(navigator, 'userAgentData', { get: () => ({ platform }) })
+      },
+      { platform: options?.platform ?? 'macOS' },
+    )
+
+    await this.page.goto(`/${options?.locale ? `${options.locale}/` : ''}tests/${path}`)
   }
 
   getNthActiveKbd(time: number) {
