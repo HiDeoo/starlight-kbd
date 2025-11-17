@@ -8,6 +8,7 @@ import { Icon } from '@astrojs/starlight/components'
 interface Props {
   label: string
   options: {
+    dataAttributes?: DOMStringMap
     label: string
     value: string
     selected: boolean
@@ -43,7 +44,11 @@ const { label, options, value } = Astro.props
     </path>
   </svg>
   <select autocomplete="off" value={value}>
-    {options.map(({ label, selected, value }) => <option {selected} set:html={label} {value} />)}
+    {
+      options.map(({ dataAttributes, label, selected, value }) => (
+        <option {selected} set:html={label} {value} {...dataAttributes} />
+      ))
+    }
   </select>
   <Icon class="icon caret" name="down-caret" />
 </label>
