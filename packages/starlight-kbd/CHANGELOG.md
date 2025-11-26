@@ -1,5 +1,11 @@
 # starlight-kbd
 
+## 0.3.0
+
+### Minor Changes
+
+- [#11](https://github.com/HiDeoo/starlight-kbd/pull/11) [`0540d63`](https://github.com/HiDeoo/starlight-kbd/commit/0540d637b64b887ae09aad868ab1400d41c3fee0) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for [`detector`](https://starlight-kbd.netlify.app/configuration/#detector) that can be used to automatically select a keyboard type based on various criteria.
+
 ## 0.2.1
 
 ### Patch Changes
