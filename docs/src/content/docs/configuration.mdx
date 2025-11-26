@@ -59,13 +59,14 @@ Keyboard types can represent different operating systems or devices, such as mac
 They can also represent different keyboard layouts, such as QWERTY or AZERTY, or even different keybindings like Vim or Emacs.
 
 Keyboard types can be configured using the `types` option of the Starlight Kbd plugin by providing an array of objects with at least an [`id`](#id) used to identify the type and a [`label`](#label) to display in the keyboard type picker.
+One of the types must also be marked as [`default`](#default) to be selected by default when no [`detector`](#detector) is used or when all detectors fail to match a keyboard type.
 
 ```js {3-5}
 starlightKbd({
   types: [
-    { id: 'mac', label: 'macOS', default: true },
-    { id: 'windows', label: 'Windows' },
-    { id: 'linux', label: 'Linux' },
+    { id: 'mac', label: 'macOS', detector: 'apple', default: true },
+    { id: 'windows', label: 'Windows', detector: 'windows' },
+    { id: 'linux', label: 'Linux', detector: 'linux' },
   ],
 })
 ```
@@ -94,6 +95,21 @@ When using the object form, the keys must be BCP-47 tags (e.g. `en`, `ar`, or `z
 **Type:** `boolean`  
 **Default:** `false`
 
-Whether the keyboard type should be selected by default.
+Whether the keyboard type should be selected by default when no [`detector`](#detector) is used or when all detectors fail to match a keyboard type.
 
 At least one keyboard type must be set as default and only one can be set as default.
+
+### `detector`
+
+**Type:** `'apple' | 'linux' | 'windows'`
+
+An optional detector that can be used to automatically select the keyboard type based on various criteria.
+When all detectors fail to match a keyboard type, the one marked as [`default`](#default) will be selected.
+
+The following detectors are currently supported:
+
+- `'apple'`: selects the keyboard type if the user is likely using an Apple device (macOS, iOS, or iPadOS).
+- `'windows'`: selects the keyboard type if the user is likely using a Windows device.
+- `'linux'`: selects the keyboard type if the user is likely using a Linux device.
+
+Such detectors use the browser's [`navigator.userAgentData`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgentData) object if available, falling back to [`navigator.platform`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/platform) or [`navigator.userAgent`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent) when necessary.
