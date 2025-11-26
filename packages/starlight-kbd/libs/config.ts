@@ -39,7 +39,10 @@ const configSchema = z
            * @default false
            */
           default: z.boolean().default(false),
-          // TODO(HiDeoo) documentation
+          /**
+           * An optional detector that can be used to automatically select the keyboard type based on various criteria.
+           * When all detectors fail to match a keyboard type, the one marked as `default` will be selected.
+           */
           detector: z.union([z.literal('apple'), z.literal('linux'), z.literal('windows')]).optional(),
         }),
       )
