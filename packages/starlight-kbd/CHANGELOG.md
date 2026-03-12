@@ -1,5 +1,15 @@
 # starlight-kbd
 
+## 0.4.0
+
+### Minor Changes
+
+- [#13](https://github.com/HiDeoo/starlight-kbd/pull/13) [`e8cec1b`](https://github.com/HiDeoo/starlight-kbd/commit/e8cec1baaaaba06567a74837ee345d3f43acb5c6) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for Astro v6, drops support for Astro v5.
+
+  ⚠️ **BREAKING CHANGE:** The minimum supported version of Starlight is now `0.38.0`.
+
+  Please follow the [upgrade guide](https://github.com/withastro/starlight/releases/tag/%40astrojs%2Fstarlight%400.38.0) to update your project.
+
 ## 0.3.0
 
 ### Minor Changes
