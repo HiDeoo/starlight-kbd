@@ -54,10 +54,18 @@ export default defineConfig({
         },
         'demo',
       ],
-      social: {
-        blueSky: 'https://bsky.app/profile/hideoo.dev',
-        github: 'https://github.com/HiDeoo/starlight-kbd',
-      },
+      social: [
+        {
+          href: 'https://bsky.app/profile/hideoo.dev',
+          icon: 'blueSky',
+          label: 'Bluesky',
+        },
+        {
+          href: 'https://github.com/HiDeoo/starlight-kbd',
+          icon: 'github',
+          label: 'GitHub',
+        },
+      ],
       title: 'Starlight Kbd',
     }),
   ],

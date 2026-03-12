@@ -21,16 +21,16 @@
     "lint": "eslint . --cache --max-warnings=0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.50.1",
-    "vitest": "^3.0.5"
+    "@playwright/test": "^1.58.2",
+    "vitest": "^4.0.18"
   },
   "peerDependencies": {
-    "@astrojs/starlight": ">=0.32.0"
+    "@astrojs/starlight": ">=0.38.0"
   },
   "engines": {
-    "node": ">=18.17.1"
+    "node": ">=22.12.0"
   },
-  "packageManager": "pnpm@9.15.4",
+  "packageManager": "pnpm@10.32.1",
   "publishConfig": {
     "access": "public"
   },
