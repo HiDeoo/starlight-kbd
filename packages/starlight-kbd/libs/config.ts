@@ -30,7 +30,7 @@ const configSchema = z
            * The value can be a string, or for multilingual sites, an object with values for each different locale.
            * When using the object form, the keys must be BCP-47 tags (e.g. `en`, `ar`, or `zh-CN`).
            */
-          label: z.union([z.string(), z.record(z.string())]),
+          label: z.union([z.string(), z.record(z.string(), z.string())]),
           /**
            * Whether the keyboard type should be selected by default.
            *
@@ -61,16 +61,11 @@ export function validateConfig(userConfig: unknown): StarlightKbdConfig {
   const config = configSchema.safeParse(userConfig)
 
   if (!config.success) {
-    const errors = config.error.flatten()
-
     throw new AstroError(
       `Invalid starlight-kbd configuration:
 
-${errors.formErrors.map((formError) => ` - ${formError}`).join('\n')}
-${Object.entries(errors.fieldErrors)
-  .map(([fieldName, fieldErrors]) => ` - ${fieldName}: ${fieldErrors.join(' - ')}`)
-  .join('\n')}
-  `,
+${z.prettifyError(config.error)}
+`,
       `See the error report above for more informations.\n\nIf you believe this is a bug, please file an issue at https://github.com/HiDeoo/starlight-kbd/issues/new/choose`,
     )
   }
