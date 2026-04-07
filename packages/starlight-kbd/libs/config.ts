@@ -66,7 +66,7 @@ export function validateConfig(userConfig: unknown): StarlightKbdConfig {
 
 ${z.prettifyError(config.error)}
 `,
-      `See the error report above for more informations.\n\nIf you believe this is a bug, please file an issue at https://github.com/HiDeoo/starlight-kbd/issues/new/choose`,
+      `See the error report above for more information.\n\nIf you believe this is a bug, please file an issue at https://github.com/HiDeoo/starlight-kbd/issues/new/choose`,
     )
   }
 
