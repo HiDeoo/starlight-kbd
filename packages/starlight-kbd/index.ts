@@ -21,9 +21,8 @@ export default function starlightKbd(userConfig: StarlightKbdUserConfig): Starli
           components: {
             ...starlightConfig.components,
             ...overrideStarlightComponent(starlightConfig.components, logger, 'ThemeProvider', 'KbdProvider'),
-            ...(config.globalPicker
-              ? overrideStarlightComponent(starlightConfig.components, logger, 'ThemeSelect', 'KbdPicker')
-              : {}),
+            ...(config.globalPicker &&
+              overrideStarlightComponent(starlightConfig.components, logger, 'ThemeSelect', 'KbdPicker')),
           },
         })
 

@@ -7,7 +7,8 @@ export function overrideStarlightComponent(
   override: keyof NonNullable<StarlightUserConfig['components']>,
   component: string,
 ) {
-  if (components?.[override]) {
+  const componentOverride = components?.[override]
+  if (componentOverride) {
     logger.warn(`It looks like you already have a \`${override}\` component override in your Starlight configuration.`)
     logger.warn(
       `To use \`starlight-kbd\`, either remove your override or update it to render the content from \`starlight-kbd/components/${component}.astro\`.`,
