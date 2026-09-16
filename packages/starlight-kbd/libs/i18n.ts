@@ -7,9 +7,10 @@ export function getTypeLabel(locale: Locale, type: StarlightKbdConfig['types'][n
 
   let label: string
   const lang = getLangFromLocale(locale)
+  const localizedLabel = type.label[lang]
 
-  if (type.label[lang]) {
-    label = type.label[lang]
+  if (localizedLabel) {
+    label = localizedLabel
   } else {
     const defaultLang = starlightConfig.defaultLocale.lang ?? starlightConfig.defaultLocale.locale
     label = defaultLang ? (type.label[defaultLang] ?? '') : ''
